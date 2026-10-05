@@ -226,7 +226,7 @@ nav.open a{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size
 <div><button class="btn" id="cok">אישור</button></div></div></div>
 <div id="priv"><div class="box">
 <h3>מדיניות פרטיות וקובצי Cookie</h3>
-<h4>איזה מידע נאסף</h4><p>כשממלאים את טופס יצירת הקשר (שם, טלפון ונושא הפנייה) המידע מועבר להודעת וואטסאפ שהגולש שולח ביוזמתו לעו"ד מונא יזבק. האתר עצמו אינו שומר את הפרטים במאגר.</p>
+<h4>איזה מידע נאסף</h4><p>כשממלאים את טופס יצירת הקשר (שם, טלפון ונושא הפנייה) המידע מועבר להודעת אימייל שהגולש שולח ביוזמתו לעו"ד מונא יזבק. האתר עצמו אינו שומר את הפרטים במאגר.</p>
 <h4>קובצי Cookie</h4><p>האתר שומר בדפדפן רק את בחירתך בנוגע לקובצי Cookie. נכון לעכשיו האתר אינו משתמש בקובצי מעקב או פרסום. אם יתווספו כלי סטטיסטיקה בעתיד, הם יופעלו רק לאחר אישורך, ותמיד אפשר לשנות את ההעדפות דרך הקישור בתחתית האתר.</p>
 <h4>שימוש במידע</h4><p>הפרטים משמשים אך ורק ליצירת קשר ולמתן מענה לפנייתך, ולא יועברו לצד שלישי למטרות שיווק.</p>
 <p style="margin-top:18px"><button class="btn" id="closep">סגירה</button></p>
@@ -269,7 +269,7 @@ document.getElementById('lead').addEventListener('submit',function(e){
 e.preventDefault();var f=e.target;
 var t='שלום עו"ד מונא, שמי '+f.name.value+'. אשמח שתחזרו אליי בנושא: '+f.topic.value+'. טלפון: '+f.phone.value;
 var a=document.getElementById('wasend');
-a.href='https://wa.me/972546563887?text='+encodeURIComponent(t);
+a.href='mailto:Monayazbak@gmail.com?subject='+encodeURIComponent('פנייה חדשה מהאתר - '+f.topic.value)+'&body='+encodeURIComponent(t);
 try{a.click();}catch(x){}
 });
 (function(){var m=document.getElementById('menu'),n=document.querySelector('nav');
