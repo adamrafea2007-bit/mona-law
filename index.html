@@ -130,7 +130,7 @@ nav.open a{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size
 <header><div class="wrap">
 <a class="brand" href="#top"><svg><use href="#logo"/></svg><span><b>מונא יזבק</b><small>עורכת דין | דיני משפחה, משפט אזרחי ומקרקעין</small></span></a>
 <nav><a href="#about">אודות</a><a href="#areas">תחומי התמחות</a><a href="#process">איך זה עובד</a><a href="#faq">שאלות נפוצות</a><a href="#contact">צור קשר</a></nav>
-<div class="hact"><a class="btn" href="tel:0546563887">054-656-3887</a><button id="menu" aria-label="תפריט" aria-expanded="false">☰</button></div>
+<div class="hact"><a class="btn" data-p="7883656450">התקשרו</a><button id="menu" aria-label="תפריט" aria-expanded="false">☰</button></div>
 </div></header>
 
 <div class="hero" id="top"><div class="wrap">
@@ -192,7 +192,7 @@ nav.open a{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size
 
 <div class="band"><div class="wrap">
 <h2>זקוקים לייעוץ משפטי?</h2><p>צרו קשר לתיאום שיחת ייעוץ ראשונית.</p>
-<a class="btn" href="tel:0546563887">התקשרו עכשיו: 054-656-3887</a>
+<a class="btn" data-p="7883656450">התקשרו עכשיו</a>
 </div></div>
 
 <section id="faq"><div class="wrap">
@@ -209,7 +209,7 @@ nav.open a{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size
 <section id="contact" class="alt"><div class="wrap">
 <h2>צור קשר</h2><p class="sub">נשמח לשמוע ממך</p>
 <div class="contact">
-<div class="card"><h3>טלפון</h3><p><a href="tel:0546563887">054-656-3887</a></p></div>
+<div class="card"><h3>טלפון</h3><p><a data-p="7883656450">התקשרו אלינו</a></p></div>
 <div class="card"><h3>וואטסאפ</h3><p><a class="wa" href="#top">שלחו הודעה<br><small>מילוי פרטים בטופס</small></a></p></div>
 <div class="card" id="mailcard" style="cursor:pointer"><h3>אימייל</h3><p><a href="mailto:Monayazbak@gmail.com" target="_blank" rel="noopener">Monayazbak@gmail.com</a></p></div>
 <div class="card"><h3>משרד ראשי</h3><p><a href="https://www.google.com/maps/search/?api=1&query=%D7%A9%D7%93%D7%A8%D7%95%D7%AA+%D7%93%D7%95%D7%93+%D7%91%D7%9F+%D7%92%D7%95%D7%A8%D7%99%D7%95%D7%9F+33+%D7%97%D7%99%D7%A4%D7%94" target="_blank" rel="noopener">שדרות דוד בן גוריון 33, חיפה<br><small>פתיחה במפה</small></a></p></div>
@@ -234,6 +234,7 @@ nav.open a{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size
 <script>
 var FR=false;try{FR=window.top!==window.self;}catch(x){FR=true;}
 var MOB=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent));
+document.querySelectorAll('a[data-p]').forEach(function(a){a.href='tel:'+a.getAttribute('data-p').split('').reverse().join('');});
 document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
 a.addEventListener('click',function(e){
 var num=a.getAttribute('href').replace('tel:','');
@@ -242,13 +243,13 @@ if(MOB){var left=false;var mark=function(){left=true;};
 window.addEventListener('blur',mark,{once:true});document.addEventListener('visibilitychange',mark,{once:true});
 setTimeout(function(){if(left)return;try{navigator.clipboard.writeText(num);}catch(x){}
 var t=document.getElementById('toast');t.style.userSelect='text';t.style.top='auto';t.style.bottom='90px';
-t.innerHTML='לא ניתן לפתוח את החייגן מכאן.<br>מספר הטלפון: <b dir="ltr">054-656-3887</b><br>(הועתק, אפשר להדביק בחייגן)';
+t.innerHTML='לא ניתן לפתוח את החייגן מכאן.<br>המספר הועתק, אפשר להדביק אותו בחייגן.';
 t.style.display='block';setTimeout(function(){t.style.display='none';},9000);},900);return;}
 e.preventDefault();
 
 try{navigator.clipboard.writeText(num);}catch(x){}
 var t=document.getElementById('toast');
-t.textContent='מספר הטלפון: 054-656-3887 (הועתק)';t.style.display='block';
+t.textContent='מספר הטלפון הועתק, אפשר להדביק אותו בחייגן';t.style.display='block';
 setTimeout(function(){t.style.display='none';},3500);
 });});
 (function(){
