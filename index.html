@@ -268,16 +268,25 @@ document.querySelectorAll('.openp').forEach(function(a){a.onclick=function(){p.s
 document.getElementById('closep').onclick=function(){p.style.display='none';};
 p.onclick=function(e){if(e.target===p)p.style.display='none';};
 })();
+var LOADED=Date.now(),SENT=0,COOL=5*60*1000;
 document.getElementById('lead').addEventListener('submit',function(e){
 e.preventDefault();var f=e.target,b=f.querySelector('button[type=submit]'),m=document.getElementById('fmsg');
-if(f._honey&&f._honey.value)return;
-var txt=b.textContent;b.disabled=true;b.textContent='שולח...';
 function say(t){m.textContent=t;m.style.display='block';}
+if(f._honey&&f._honey.value)return;
+if(Date.now()-LOADED<3000){say('אנא נסו שוב בעוד רגע.');return;}
+var nm=f.name.value.trim();
+if(nm.length<2||nm.length>60||!/\p{L}{2}/u.test(nm)){say('אנא הזינו שם מלא תקין.');return;}
+var dg=f.phone.value.replace(/\D/g,'');if(dg.indexOf('972')===0)dg='0'+dg.slice(3);
+if(!/^0(5\d{8}|7\d{8}|[23489]\d{7})$/.test(dg)){say('אנא הזינו מספר טלפון ישראלי תקין.');return;}
+var LK='leadSentAt',last=SENT;
+try{last=Math.max(last,parseInt(localStorage.getItem(LK)||'0',10)||0);}catch(x){}
+if(Date.now()-last<COOL){say('הפנייה כבר התקבלה, נחזור אליכם בהקדם.');return;}
+var txt=b.textContent;b.disabled=true;b.textContent='שולח...';
 fetch('https://formsubmit.co/ajax/adam.rafea2007@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-body:JSON.stringify({'שם':f.name.value,'טלפון':f.phone.value,'נושא':f.topic.value,_subject:'פנייה חדשה מהאתר - '+f.topic.value,_template:'table'})})
+body:JSON.stringify({'שם':nm,'טלפון':dg,'נושא':f.topic.value,_subject:'פנייה חדשה מהאתר - '+f.topic.value,_template:'table'})})
 .then(function(r){return r.json();})
 .then(function(d){
-if(d&&(d.success===true||d.success==='true')){f.reset();say('תודה, הפרטים התקבלו. נחזור אליכם בהקדם.');}
+if(d&&(d.success===true||d.success==='true')){SENT=Date.now();try{localStorage.setItem(LK,String(SENT));}catch(x){}f.reset();say('תודה, הפרטים התקבלו. נחזור אליכם בהקדם.');}
 else{throw new Error('fail');}
 })
 .catch(function(){say('אירעה שגיאה בשליחה. אפשר לנסות שוב בעוד רגע או ליצור קשר בטלפון.');})
