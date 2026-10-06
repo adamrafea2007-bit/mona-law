@@ -268,7 +268,7 @@ document.querySelectorAll('.openp').forEach(function(a){a.onclick=function(){p.s
 document.getElementById('closep').onclick=function(){p.style.display='none';};
 p.onclick=function(e){if(e.target===p)p.style.display='none';};
 })();
-var LOADED=Date.now(),SENT=0,COOL=5*60*1000;
+var LOADED=Date.now(),SENT=0,COOL=2*60*1000;
 document.getElementById('lead').addEventListener('submit',function(e){
 e.preventDefault();var f=e.target,b=f.querySelector('button[type=submit]'),m=document.getElementById('fmsg');
 function say(t){m.textContent=t;m.style.display='block';}
